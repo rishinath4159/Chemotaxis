@@ -49,16 +49,16 @@
  		if(bacteriaX < mouseX){
  			bacteriaX += Math.floor(Math.random() * Math.floor(10));
  		} else if (bacteriaX > mouseX){
- 			bacteriaX += Math.floor(Math.random() * Math.floor(10)) - 10;
+ 			bacteriaX += Math.floor(Math.random() * Math.floor(10)) - 20;
  		}
 
  		if(bacteriaY < mouseY){
  			bacteriaY += Math.floor(Math.random() * Math.floor(10));
  		} else if (bacteriaY > mouseY){
- 			bacteriaY += Math.floor(Math.random() * Math.floor(10)) - 10;
+ 			bacteriaY += Math.floor(Math.random() * Math.floor(10)) - 20;
  		}
- 		bacteriaX += Math.floor(Math.random() * Math.floor(10)) - 7;
- 		bacteriaY += Math.floor(Math.random() * Math.floor(10)) - 7;
+ 		bacteriaX += Math.floor(Math.random() * Math.floor(3)) - 1;
+ 		bacteriaY += Math.floor(Math.random() * Math.floor(3)) - 1;
  	}
 
  	void target(int x, int y){
