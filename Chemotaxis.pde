@@ -40,25 +40,29 @@
 	int targetX;
 	int targetY;
 
+	int bacteriaColor;
+
  	Bacteria(){
  		bacteriaX = (int)(Math.random()*500);
  		bacteriaY = (int)(Math.random()*500);
+ 		bacteriaColor = (int)(Math.random()*255);
  	}
 
  	void move(){
- 		if(bacteriaX < mouseX){
- 			bacteriaX += Math.floor(Math.random() * Math.floor(10));
- 		} else if (bacteriaX > mouseX){
- 			bacteriaX += Math.floor(Math.random() * Math.floor(10)) - 20;
+ 		if(bacteriaX < targetX){
+ 			bacteriaX += (int)(Math.random() * 10);
+ 		} else if (bacteriaX > targetX){
+ 			bacteriaX -= (int)(Math.random() * 10);
  		}
 
- 		if(bacteriaY < mouseY){
- 			bacteriaY += Math.floor(Math.random() * Math.floor(10));
- 		} else if (bacteriaY > mouseY){
- 			bacteriaY += Math.floor(Math.random() * Math.floor(10)) - 20;
+ 		if(bacteriaY < targetY){
+ 			bacteriaY += (int)(Math.random() * 10);
+ 		} else if (bacteriaY > targetY){
+ 			bacteriaY -= (int)(Math.random() * 10);
  		}
- 		bacteriaX += Math.floor(Math.random() * Math.floor(3)) - 1;
- 		bacteriaY += Math.floor(Math.random() * Math.floor(3)) - 1;
+ 		
+ 		bacteriaX -= (int)(Math.random() * 20) - 10;
+ 		bacteriaY -= (int)(Math.random() * 20) - 10;
  	}
 
  	void target(int x, int y){
@@ -67,7 +71,7 @@
  	}
 
  	void show(){
- 		fill(255,0,0);
+ 		fill(bacteriaColor);
  		ellipse(bacteriaX, bacteriaY, 5, 5);
  	}
  }  
