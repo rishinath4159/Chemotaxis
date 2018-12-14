@@ -35,6 +35,8 @@
  		}
  		
  	}
+
+ 	
  	
  }
 
@@ -102,17 +104,25 @@
 
  	int size;
  	int prey;
+ 	float preyDist;
+ 	int col1;
+ 	int col2;
+ 	int col3;
 
  	Predator(){
  		bacteriaX = 250;
  		bacteriaY = 250;
- 		size = 5;
+ 		size = 10;
  		prey = (int)(Math.random() * 500);
+ 		preyDist = 300;
+ 		col1 = (int)(Math.random() * 255);
+ 		col2 = (int)(Math.random() * 255);
+ 		col3 = (int)(Math.random() * 255);
  	}
 
  	@Override
  	void show(){
- 		fill(255, 0, 0);
+ 		fill(col1, col2, col3);
  		ellipse(bacteriaX, bacteriaY, size, size);
  	}
 
@@ -124,25 +134,28 @@
 
  	int track(Bacteria[] bacteria){
  		for (int i=0; i<bacteria.length; i++){
- 			if (dist(bacteriaX, bacteriaY, bacteria[i].returnX(), bacteria[i].returnY()) < prey) {
+ 			if (!bacteria[prey].alive()){
+ 				if (dist(bacteriaX, bacteriaY, bacteria[i].returnX(), bacteria[i].returnY()) < preyDist) {
  				prey = i;
+ 				preyDist = dist(bacteriaX, bacteriaY, bacteria[i].returnX(), bacteria[i].returnY());
+ 				}
  			}
- 		}
 
+ 		}
  		return(prey);
  	}
 
  	void chase(Bacteria[] bacteria, int i){
  		if (bacteriaX < bacteria[i].returnX()){
- 			bacteriaX += 6;
+ 			bacteriaX += 3;
  		} else {
- 			bacteriaX -= 6;
+ 			bacteriaX -= 3;
  		}
 
  		if (bacteriaY < bacteria[i].returnY()){
- 			bacteriaY += 6;
+ 			bacteriaY += 3;
  		} else {
- 			bacteriaY -= 6;
+ 			bacteriaY -= 3;
  		}
  	}
 
@@ -150,8 +163,14 @@
  		for (int i=0; i<bacteria.length; i++){
  			if (dist(bacteriaX, bacteriaY, bacteria[i].returnX(), bacteria[i].returnY()) < 10) {
  				bacteria[i].die();
+ 				col1 = (int)(Math.random() * 255);
+ 				col2 = (int)(Math.random() * 255);
+ 				col3 = (int)(Math.random() * 255);
+
  			}
  		}
  	}
-
+ 
  }
+
+
