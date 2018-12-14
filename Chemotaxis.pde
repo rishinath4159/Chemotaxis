@@ -133,7 +133,7 @@
  	}
 
  	int track(Bacteria[] bacteria){
- 		if (!bacteria[prey].alive()){
+ 		//if (!bacteria[prey].alive()){
  			for (int i=0; i<bacteria.length; i++){
  				preyDist = 200;
  				if (dist(bacteriaX, bacteriaY, bacteria[i].returnX(), bacteria[i].returnY()) < preyDist && bacteria[i].alive()) {
@@ -142,7 +142,7 @@
  				}
  			}
 
- 		}
+ 		//}
  		return(prey);
  	}
 
