@@ -22,9 +22,10 @@
  	{
  		bacteria[i].move();
  		bacteria[i].show();
- 		predator.move();
- 		predator.show();
+ 		
  	}
+ 	predator.move();
+ 	predator.show();
  }
 
 
@@ -44,8 +45,9 @@
  	}
 
  	void move(){
- 		bacteriaX -= (int)(Math.random() * 20) - 10;
- 		bacteriaY -= (int)(Math.random() * 20) - 10;
+ 		bacteriaX += (int)(Math.random() * 20) - 10;
+ 		bacteriaY += (int)(Math.random() * 20) - 10;
+
  	}
 
  	int returnX(){
@@ -65,8 +67,8 @@
  class Predator extends Bacteria {
 
  	Predator(){
- 		bacteriaX = (int)(Math.random()*500);
- 		bacteriaY = (int)(Math.random()*500);
+ 		bacteriaX = 250;
+ 		bacteriaY = 250;
  	}
 
  	@Override
