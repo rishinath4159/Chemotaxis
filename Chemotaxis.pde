@@ -30,7 +30,7 @@
  		if (bacteria[i].alive()){
  			bacteria[i].move();
  			bacteria[i].flee(predator.returnX(), predator.returnY());
- 			bacteria[i].show();
+ 			bacteria[i].show(predator.returnX(), predator.returnY());
 
  		}
  		
@@ -79,8 +79,12 @@
  		return(bacteriaY);
  	}
 
- 	void show(){
- 		fill(bacteriaColor);
+ 	void show(int x, int y){
+ 		if (dist(bacteriaX, bacteriaY, x, y) < 50){
+ 			fill(255,0,0);
+ 		} else {
+ 			fill(bacteriaColor);
+ 		}
  		ellipse(bacteriaX, bacteriaY, 5, 5);
  	}
 
