@@ -16,7 +16,7 @@
 
  void draw()   
  {    
- 	fill(0,0,0);
+ 	fill(150,150,100);
  	rect(0, 0, 500, 500);
 
  	predator.move();
@@ -59,8 +59,8 @@
  	}
 
  	void move(){
- 		bacteriaX += (int)(Math.random() * 21) - 10;
- 		bacteriaY += (int)(Math.random() * 21) - 10;
+ 		bacteriaX += (int)(Math.random() * 11) - 5;
+ 		bacteriaY += (int)(Math.random() * 11) - 5;
  	}
 
  	void die(){
@@ -80,7 +80,7 @@
  	}
 
  	void show(int x, int y){
- 		if (dist(bacteriaX, bacteriaY, x, y) < 50){
+ 		if (dist(bacteriaX, bacteriaY, x, y) < 60){
  			fill(255,0,0);
  		} else {
  			fill(bacteriaColor);
@@ -89,7 +89,7 @@
  	}
 
  	void flee(int x, int y){
- 		if (dist(bacteriaX, bacteriaY, x, y) < 40){
+ 		if (dist(bacteriaX, bacteriaY, x, y) < 50){
  			if (bacteriaX > x){
  				bacteriaX += 2;
  			} else {
@@ -130,13 +130,13 @@
  	}
 
  	void move(){
- 		bacteriaX += (int)(Math.random() * 11) - 5;
- 		bacteriaY += (int)(Math.random() * 11) - 5;
+ 		bacteriaX += (int)(Math.random() * 5) - 2;
+ 		bacteriaY += (int)(Math.random() * 5) - 2;
  	}
 
  	int track(Bacteria[] bacteria){
  		for (int i=0; i<bacteria.length; i++){
- 			if (!(bacteria[prey].alive())){
+ 			if (!bacteria[prey].alive()){
  				preyDist = 200;
  				if (dist(bacteriaX, bacteriaY, bacteria[i].returnX(), bacteria[i].returnY()) < preyDist && bacteria[i].alive()) {
 	 				prey = i;
