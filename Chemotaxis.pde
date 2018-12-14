@@ -1,6 +1,5 @@
  Bacteria[] bacteria;
  Predator predator;
- int kills;
 
  void setup()   
  {     
@@ -12,7 +11,6 @@
  	{
  		bacteria[i] = new Bacteria();
  	}
- 	kills = 0;
  }   
 
 
@@ -55,6 +53,8 @@
  	}
 
  	void move(){
+ 		bacteriaX = wrap(bacteriaX);
+ 		bacteriaY = wrap(bacteriaY);
  		bacteriaX += (int)(Math.random() * 11) - 5;
  		bacteriaY += (int)(Math.random() * 11) - 5;
  	}
@@ -128,6 +128,8 @@
  	}
 
  	void move(){
+ 		bacteriaX = wrap(bacteriaX);
+ 		bacteriaY = wrap(bacteriaY);
  		bacteriaX += (int)(Math.random() * 5) - 2;
  		bacteriaY += (int)(Math.random() * 5) - 2;
  	}
@@ -167,8 +169,6 @@
 	 			col1 = (int)(Math.random() * 255);
 	 			col2 = (int)(Math.random() * 255);
 	 			col3 = (int)(Math.random() * 255);
-	 			kills += 1;
-	 			println(kills);
  			}
  		}
  	}
@@ -176,3 +176,11 @@
  }
 
 
+
+ int wrap (int pos){
+ 	if (pos > 500){
+ 		return (int) pos % 500;
+ 	}
+ 	return pos;	
+ }
+ 
