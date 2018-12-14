@@ -43,7 +43,7 @@
 
 	int bacteriaX;
 	int bacteriaY;
-	boolean alive;
+	boolean living;
 
 	int bacteriaColor;
 
@@ -51,7 +51,7 @@
  		bacteriaX = (int)(Math.random()*500);
  		bacteriaY = (int)(Math.random()*500);
  		bacteriaColor = (int)(Math.random()*255);
- 		alive = true;
+ 		living = true;
  	}
 
  	void move(){
@@ -60,11 +60,11 @@
  	}
 
  	void die(){
- 		alive = false;
+ 		living = false;
  	}
 
  	boolean alive(){
- 		return(alive);
+ 		return(living);
  	}
 
  	int returnX(){
@@ -133,7 +133,7 @@
  	}
 
  	int track(Bacteria[] bacteria){
- 		//if (!bacteria[prey].alive()){
+ 		if (!bacteria[prey].alive()){
  			for (int i=0; i<bacteria.length; i++){
  				preyDist = 200;
  				if (dist(bacteriaX, bacteriaY, bacteria[i].returnX(), bacteria[i].returnY()) < preyDist && bacteria[i].alive()) {
@@ -142,7 +142,7 @@
  				}
  			}
 
- 		//}
+ 		}
  		return(prey);
  	}
 
