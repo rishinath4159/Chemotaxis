@@ -120,13 +120,11 @@
  		col3 = (int)(Math.random() * 255);
  	}
 
- 	@Override
  	void show(){
  		fill(col1, col2, col3);
  		ellipse(bacteriaX, bacteriaY, size, size);
  	}
 
- 	@Override
  	void move(){
  		bacteriaX += (int)(Math.random() * 11) - 5;
  		bacteriaY += (int)(Math.random() * 11) - 5;
@@ -135,9 +133,10 @@
  	int track(Bacteria[] bacteria){
  		for (int i=0; i<bacteria.length; i++){
  			if (!bacteria[prey].alive()){
- 				if (dist(bacteriaX, bacteriaY, bacteria[i].returnX(), bacteria[i].returnY()) < preyDist) {
- 				prey = i;
- 				preyDist = dist(bacteriaX, bacteriaY, bacteria[i].returnX(), bacteria[i].returnY());
+ 				preyDist = 200;
+ 				if (dist(bacteriaX, bacteriaY, bacteria[i].returnX(), bacteria[i].returnY()) < preyDist && bacteria[i].alive()) {
+	 				prey = i;
+	 				preyDist = dist(bacteriaX, bacteriaY, bacteria[i].returnX(), bacteria[i].returnY());
  				}
  			}
 
@@ -161,12 +160,11 @@
 
  	void eat(Bacteria[] bacteria){
  		for (int i=0; i<bacteria.length; i++){
- 			if (dist(bacteriaX, bacteriaY, bacteria[i].returnX(), bacteria[i].returnY()) < 10) {
+ 			if (dist(bacteriaX, bacteriaY, bacteria[i].returnX(), bacteria[i].returnY()) < 10 && bacteria[i].alive()) {
  				bacteria[i].die();
- 				col1 = (int)(Math.random() * 255);
- 				col2 = (int)(Math.random() * 255);
- 				col3 = (int)(Math.random() * 255);
-
+	 			col1 = (int)(Math.random() * 255);
+	 			col2 = (int)(Math.random() * 255);
+	 			col3 = (int)(Math.random() * 255);
  			}
  		}
  	}
