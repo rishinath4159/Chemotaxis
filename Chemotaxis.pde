@@ -1,16 +1,18 @@
  Bacteria[] bacteria;
  Predator predator;
+ int kills;
 
  void setup()   
  {     
  	size(500,500);
- 	background(0,0,0);
+ 	background(150,150,100);
  	bacteria = new Bacteria[500];
  	predator = new Predator();
  	for (int i = 0; i < bacteria.length; i++)
  	{
  		bacteria[i] = new Bacteria();
  	}
+ 	kills = 0;
  }   
 
 
@@ -26,18 +28,12 @@
 
  	for (int i = 0; i < bacteria.length; i++)
  	{
- 		
  		if (bacteria[i].alive()){
  			bacteria[i].move();
  			bacteria[i].flee(predator.returnX(), predator.returnY());
  			bacteria[i].show(predator.returnX(), predator.returnY());
-
  		}
- 		
  	}
-
- 	
- 	
  }
 
 
@@ -117,8 +113,10 @@
  		bacteriaX = 250;
  		bacteriaY = 250;
  		size = 10;
- 		prey = (int)(Math.random() * 500);
- 		preyDist = 300;
+
+ 		prey = 0;
+ 		preyDist = 200;
+
  		col1 = (int)(Math.random() * 255);
  		col2 = (int)(Math.random() * 255);
  		col3 = (int)(Math.random() * 255);
@@ -169,6 +167,8 @@
 	 			col1 = (int)(Math.random() * 255);
 	 			col2 = (int)(Math.random() * 255);
 	 			col3 = (int)(Math.random() * 255);
+	 			kills += 1;
+	 			println(kills);
  			}
  		}
  	}
