@@ -135,8 +135,8 @@
  	}
 
  	int track(Bacteria[] bacteria){
- 		for (int i=0; i<bacteria.length; i++){
- 			if (!bacteria[prey].alive()){
+ 		if (!bacteria[prey].alive()){
+ 			for (int i=0; i<bacteria.length; i++){
  				preyDist = 200;
  				if (dist(bacteriaX, bacteriaY, bacteria[i].returnX(), bacteria[i].returnY()) < preyDist && bacteria[i].alive()) {
 	 				prey = i;
