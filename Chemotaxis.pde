@@ -18,9 +18,11 @@
  {    
  	fill(0,0,0);
  	rect(0, 0, 500, 500);
+
  	predator.move();
- 	predator.show();
+ 	predator.chase(bacteria, predator.track(bacteria));
  	predator.eat(bacteria);
+ 	predator.show();
 
  	for (int i = 0; i < bacteria.length; i++)
  	{
@@ -99,11 +101,13 @@
  class Predator extends Bacteria {
 
  	int size;
+ 	int prey;
 
  	Predator(){
  		bacteriaX = 250;
  		bacteriaY = 250;
  		size = 5;
+ 		prey = (int)(Math.random() * 500);
  	}
 
  	@Override
@@ -118,11 +122,34 @@
  		bacteriaY += (int)(Math.random() * 11) - 5;
  	}
 
+ 	int track(Bacteria[] bacteria){
+ 		for (int i=0; i<bacteria.length; i++){
+ 			if (dist(bacteriaX, bacteriaY, bacteria[i].returnX(), bacteria[i].returnY()) < prey) {
+ 				prey = i;
+ 			}
+ 		}
+
+ 		return(prey);
+ 	}
+
+ 	void chase(Bacteria[] bacteria, int i){
+ 		if (bacteriaX < bacteria[i].returnX()){
+ 			bacteriaX += 6;
+ 		} else {
+ 			bacteriaX -= 6;
+ 		}
+
+ 		if (bacteriaY < bacteria[i].returnY()){
+ 			bacteriaY += 6;
+ 		} else {
+ 			bacteriaY -= 6;
+ 		}
+ 	}
+
  	void eat(Bacteria[] bacteria){
  		for (int i=0; i<bacteria.length; i++){
  			if (dist(bacteriaX, bacteriaY, bacteria[i].returnX(), bacteria[i].returnY()) < 10) {
  				bacteria[i].die();
- 				size += 1;
  			}
  		}
  	}
