@@ -19,9 +19,9 @@
  	fill(150,150,100);
  	rect(0, 0, 500, 500);
 
- 	predator.move();
  	predator.chase(bacteria, predator.track(bacteria));
  	predator.eat(bacteria);
+ 	predator.move();
  	predator.show();
 
  	for (int i = 0; i < bacteria.length; i++)
@@ -45,18 +45,23 @@
 
 	int bacteriaColor;
 
+	int range;
+
  	Bacteria(){
  		bacteriaX = (int)(Math.random()*500);
  		bacteriaY = (int)(Math.random()*500);
  		bacteriaColor = (int)(Math.random()*255);
  		living = true;
+ 		range = (int)(Math.random()*100)+40;
  	}
 
  	void move(){
  		bacteriaX = wrap(bacteriaX);
  		bacteriaY = wrap(bacteriaY);
- 		bacteriaX += (int)(Math.random() * 11) - 5;
- 		bacteriaY += (int)(Math.random() * 11) - 5;
+ 		if ((Math.random()*1000)<2){
+ 			bacteriaX += (int)(Math.random() * 5) - 2;
+ 			bacteriaY += (int)(Math.random() * 5) - 2;
+ 		}
  	}
 
  	void die(){
@@ -76,7 +81,7 @@
  	}
 
  	void show(int x, int y){
- 		if (dist(bacteriaX, bacteriaY, x, y) < 60){
+ 		if (dist(bacteriaX, bacteriaY, x, y) < 40){
  			fill(255,0,0);
  		} else {
  			fill(bacteriaColor);
@@ -84,8 +89,20 @@
  		ellipse(bacteriaX, bacteriaY, 5, 5);
  	}
 
+
  	void flee(int x, int y){
- 		if (dist(bacteriaX, bacteriaY, x, y) < 50){
+ 		if (dist(bacteriaX, bacteriaY, x, y) < 40){
+ 			if (bacteriaX > x){
+ 				bacteriaX += 2;
+ 			} else {
+ 				bacteriaX -= 2;
+ 			}
+ 			if (bacteriaY > y){
+ 				bacteriaY += 2;
+ 			} else {
+ 				bacteriaY -= 2;
+ 			}
+ 		} else if (dist(bacteriaX, bacteriaY, x, y) < range && (Math.random()*100)<2){
  			if (bacteriaX > x){
  				bacteriaX += 2;
  			} else {
@@ -97,6 +114,7 @@
  				bacteriaY -= 2;
  			}
  		}
+
  	}
  }  
 
@@ -130,14 +148,14 @@
  	void move(){
  		bacteriaX = wrap(bacteriaX);
  		bacteriaY = wrap(bacteriaY);
- 		bacteriaX += (int)(Math.random() * 5) - 2;
- 		bacteriaY += (int)(Math.random() * 5) - 2;
  	}
 
  	int track(Bacteria[] bacteria){
- 		if (!bacteria[prey].alive()){
+ 		if (bacteria[prey].alive()){
+ 			return(prey);
+ 		} else {
+ 			preyDist = 500;
  			for (int i=0; i<bacteria.length; i++){
- 				preyDist = 200;
  				if (dist(bacteriaX, bacteriaY, bacteria[i].returnX(), bacteria[i].returnY()) < preyDist && bacteria[i].alive()) {
 	 				prey = i;
 	 				preyDist = dist(bacteriaX, bacteriaY, bacteria[i].returnX(), bacteria[i].returnY());
@@ -164,8 +182,8 @@
 
  	void eat(Bacteria[] bacteria){
  		for (int i=0; i<bacteria.length; i++){
- 			if (dist(bacteriaX, bacteriaY, bacteria[i].returnX(), bacteria[i].returnY()) < 10 && bacteria[i].alive()) {
- 				bacteria[i].die();
+ 			if (dist(bacteriaX, bacteriaY, bacteria[i].returnX(), bacteria[prey].returnY()) < 10 && bacteria[prey].alive()) {
+ 				bacteria[prey].die();
 	 			col1 = (int)(Math.random() * 255);
 	 			col2 = (int)(Math.random() * 255);
 	 			col3 = (int)(Math.random() * 255);
@@ -179,7 +197,9 @@
 
  int wrap (int pos){
  	if (pos > 500){
- 		return (int) pos % 500;
+ 		return 500;
+ 	} else if (pos < 0){
+ 		return 0;
  	}
  	return pos;	
  }
